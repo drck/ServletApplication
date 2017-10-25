@@ -1,0 +1,235 @@
+.toma_fotografia_button
+{
+    background-image: url("img/btn_tomarFoto_on.png");
+      background-repeat: no-repeat;    
+    width:168px;
+    height:40px;
+    background-color:white;
+      cursor:pointer;
+      margin-left:auto;
+	margin-right:auto;	 
+}
+
+
+#my_camera
+{
+
+margin-top:20px;
+margin-left:auto;
+margin-right:auto;	
+	
+}
+
+
+
+.cancelar_NO_button
+{
+	float:left;
+	 background-image: url("img/btn_no_on.png");
+      background-repeat: no-repeat;    
+    width:119px;
+    height:40px;
+    background-color:white;
+      cursor:pointer;
+      margin-left:auto;
+	margin-right:auto;
+	
+}
+
+
+.aceptar_SI_button
+{
+	float:left;
+ background-image: url("img/btn_si_on.png");
+      background-repeat: no-repeat;    
+    width:119px;
+    height:40px;
+    background-color:white;
+      cursor:pointer;
+      margin-left:auto;
+	margin-right:auto;
+	
+}
+
+
+.contenedor_button_SI_NO
+{
+	 margin-top:10px;
+	width:240px;
+	 margin-left:auto;
+	margin-right:auto;
+}
+
+.contenedor_button_preview
+{
+	
+margin-left:auto;
+margin-right:auto;
+width:80%;
+margin-bottom:15px;
+
+}
+
+
+.titulo_disclaimer_fotografia
+{
+	
+	 width:100%;
+ background-color:Red;
+ color:White;
+ font-weight:bold;
+ text-align:center;
+}
+
+#pre_take_buttons{
+margin-top: 15px;
+display:none;
+}
+
+#post_take_buttons
+{
+	
+	  height:150px;
+	margin-top:15px;
+	 border:1px solid red;
+	 width:350px;
+	     margin-left:auto;
+	margin-right:auto;
+	display:none;
+	}
+	
+	
+.preg
+{
+	margin-top:10px;
+	 width:100%;
+	  text-align:center;
+}
+
+.tit_pic
+{
+
+margin-top:10px;
+width:400px;
+text-align:center;
+margin-left:auto;
+margin-right:auto;		
+font-family: arial;
+font-weight: bold;
+font-size: 16px;color: #CC1414
+
+}
+
+
+.contenedor_subtit 
+{
+	 width:400px;
+	margin-top:10px;
+margin-left:auto;
+margin-right:auto;		
+}
+
+
+.contenedor_checkbox {
+	float:left;
+	 width:30px;
+	 display:none;
+}
+	 
+.contenedor_texto
+{
+ 
+font-family: arial;
+font-size: 16px;
+color: #666666;
+margin-left:auto;
+margin-right:auto;		
+}
+
+
+  
+  .btn_img_continuar
+  {
+  	 background-image: url("img/btn_continuar_on.png");
+      background-repeat: no-repeat;   
+       background-color:white;
+   cursor:pointer; 
+   width:119px;
+   height:40px;
+   margin:0px auto;
+   display:none;
+ }
+ 
+ 
+ #previa_foto
+ {
+ 	
+  width: 1240px;
+ height: 90%; 
+  background-color:White;
+  z-index:50;
+  position:absolute;
+ 	
+ }
+ 
+ 
+  #contenedor_btn_activar
+{  
+   width:100%;
+}
+  
+  
+  .btn_img_activar
+  {
+  	 background-image: url("img/btn_activarCamara_on.png");
+     background-repeat: no-repeat;   
+     background-color:white;
+	 cursor:pointer; 
+	 width:168px;
+	 height:40px;
+	 margin-left :auto;
+	 margin-right:auto;
+ }
+ 
+ 
+ #front1
+ {
+ 	
+ 	display:none;
+ 	
+ 	}
+ 	
+ 	
+.centro_prev_foto
+{ 	 
+ /*background-image: url("img/prev1_foto.png");*/
+ /*ackground-repeat: no-repeat;   */
+ width:293px;
+ height:452px;
+ background-color:white;       
+ margin-left:auto;
+ margin-right:auto;	 	
+}
+
+.centro_prev_foto img
+{ 
+	width:300px;
+}
+
+
+p
+{
+	
+	/*
+	font-size:40px;	 
+	 text-align:justify;*/	 	 	
+ 	font-family: arial;
+	font-size: 16px;	
+	font-weight: bold;
+	 width:80%;
+	 margin-left:auto;
+	margin-right:auto;
+
+	}
+	
+	

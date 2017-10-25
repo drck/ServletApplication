@@ -1,0 +1,19 @@
+
+
+html, body {
+   
+   
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
+    border: 0px;
+    width: 1240px;
+    height: 100%;
+    /*background-color:White;*/
+}
+
+
+.barra_progreso
+{
+      padding: 0px 0px 0px 0px;
+	  margin: 0px 0px 0px 0px;
+}

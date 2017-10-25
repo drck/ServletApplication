@@ -1,0 +1,25 @@
+<html>
+<head>
+</head>
+<script type="text/javascript"> 
+function addRow(){
+	console.log("Agregando columna....");
+	var table= document.getElementById("myTable");
+	var rowCount = table.rows.length;
+	var row = table.insertRow(rowCount);
+}
+
+</script>
+<body>
+<div>My Table</div>
+<div>
+<button onClick="addRow()">Add</button>
+<table id="myTable" width="500px" border=1;>
+<tr>
+<th>NP</th><th>Nombre</th><th>Apellido</th><th>Edad</th><th>Sexo</th>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

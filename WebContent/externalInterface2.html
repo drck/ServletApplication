@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>externalInterface</title>
+<style type="text/css">
+ 
+body {
+    font-family:Arial;
+}
+ 
+#asSend {
+    padding-top:20px;
+    font-size:12px;
+}
+#htmlWrap {
+    margin-top:10px;
+    width:578px;
+    padding-left:20px;
+    border-width:1px;
+    border-style:solid;
+}
+#sender {
+    margin-top:10px;
+}
+#textChange {
+    font-size:13px;
+    font-weight:bold;
+    padding-top:10px;
+    padding-bottom:20px;
+}
+ 
+</style>
+<script>
+function receiveColor(value) {
+	alert("Cambiando Color");
+    document.bgColor = "#" + value;
+}
+window.onload = function() {
+    var sender = document.getElementById("sender");     //getElementById finds an element according to its "id" property
+    sender.onclick = function() {
+        var ta = document.getElementById("textArea");
+        document['externalInterface'].receiveText(ta.value);
+        ta.value = "";
+    };
+}
+</script>
+</head>
+<body>
+
+ <object type="application/x-shockwave-flash" data="externalInterface.swf" id="externalInterface" width="600" height="300">
+  <param name="movie" value="externalInterface.swf" />
+  <param name="quality" value="high" />
+  <param name="bgcolor" value="#ffffff" />
+  	<param name="play" value="true" />
+				<param name="loop" value="true" />
+				<param name="wmode" value="window" />
+				<param name="scale" value="showall" />
+				<param name="menu" value="true" />
+				<param name="devicefont" value="false" />
+				<param name="salign" value="" />
+   <param name="allowScriptAccess" value="sameDomain" />
+    <param name="allowFullScreen" value="false" />
+  
+</object>
+<div id="htmlWrap">
+<div id="asSend">
+  <label for="textArea">Send to actionscript:</label><br />
+  <textarea cols="50" rows="4" id="textArea" name="textArea"></textarea>
+  <br />
+  <button id="sender" name="sender">Send</button>
+</div>
+<div id="textChange">Use Actionscript to change me!</div>
+</div>
+</body>
+</html>

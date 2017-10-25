@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<title>record</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css" media="screen">
+html, body {
+	height: 100%;
+	background-color: #ffffff;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#flashContent {
+	width: 100%;
+	height: 100%;
+}
+</style>
+<script>
+	window.onload = function() {
+		var btnGrabar = document.getElementById("btnGrabar");
+		//getElementById finds an element according to its "id" property
+		var btnDetener = document.getElementById("btnDetener");
+		var btnReproducir = document.getElementById("btnReproducir");
+		var btnDetenerReproduccion = document
+				.getElementById("btnDetenerReproduccion");
+		var btnGuardar = document.getElementById("btnGuardar");
+		btnGrabar.onclick = function() {
+			document['record']._startRecord();
+		};
+		btnDetener.onclick = function() {
+			document['record']._stopRecord();
+		};
+		btnReproducir.onclick = function() {
+			document['record']._startPlaying();
+		};
+		btnDetenerReproduccion.onclick = function() {
+			document['record']._stopPlaying();
+		};
+		btnGuardar.onclick = function() {
+		 var response = document['record']._saveRecording();
+			
+		};
+		btnChangeMic.onclick = function() {
+			alert("microfonos:");
+			document['record']._changeMicrophone("0");
+		};
+		btnChangeSound.onclick = function() {
+			document['record']._changeSound("0");
+		};
+	}
+	
+	function receiveAudio(value) {
+		
+		alert("Audio: " + value.length);
+	}
+</script>
+
+</head>
+<body>
+	<h2>Hola</h2>
+	<button id="btnGrabar">Grabar</button>
+	<button id="btnDetener">Detener</button>
+	<button id="btnReproducir">Play</button>
+	<button id="btnDetenerReproduccion">Stop</button>
+	<button id="btnGuardar">Guardar</button>
+	<button id="btnChangeMic">Cambiar Microfono</button>
+	<button id="btnChangeSound">Cambiar SalidaAudio</button>
+	<div id="flashContent">
+		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+			width="600" height="300" id="externalInterface" align="middle">
+			<param name="movie" value="record2.swf" />
+			<param name="quality" value="high" />
+			<param name="bgcolor" value="#d6d6d6" />
+			<param name="play" value="true" />
+			<param name="loop" value="true" />
+			<param name="wmode" value="window" />
+			<param name="scale" value="showall" />
+			<param name="menu" value="true" />
+			<param name="devicefont" value="false" />
+			<param name="salign" value="" />
+			<param name="allowScriptAccess" value="sameDomain" />
+			<!--[if !IE]>-->
+			<object id="record" type="application/x-shockwave-flash"
+				data="record2.swf" width="550" height="400">
+				<param name="movie" value="record.swf" />
+				<param name="quality" value="high" />
+				<param name="bgcolor" value="#ffffff" />
+				<param name="play" value="true" />
+				<param name="loop" value="true" />
+				<param name="wmode" value="window" />
+				<param name="scale" value="showall" />
+				<param name="menu" value="true" />
+				<param name="devicefont" value="false" />
+				<param name="salign" value="" />
+				<param name="allowScriptAccess" value="sameDomain" />
+				<!--<![endif]-->
+				<a href="http://www.adobe.com/go/getflash"> <img
+					src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+					alt="Obtener Adobe Flash Player" />
+				</a>
+				<!--[if !IE]>-->
+			</object>
+			<!--<![endif]-->
+		</object>
+	</div>
+
+</body>
+</html>

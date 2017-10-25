@@ -1,0 +1,8 @@
+﻿<flash_project name="~webcam" version="1">
+	<project_file path="./~webcam.fla" filetype="fla" profile="" def_file="true"/>
+	<project_file path="./com/adobe/images/JPGEncoder.as" filetype="as"/>
+	<project_file path="./mx/utils/Base64Encoder.as" filetype="as"/>
+	<project_file path="./com/adobe/images/PNGEncoder.as" filetype="as"/>
+	<project_file path="./com/adobe/images/BitString.as" filetype="as"/>
+	<project_file path="./Webcam.as" filetype="as"/>
+</flash_project>
