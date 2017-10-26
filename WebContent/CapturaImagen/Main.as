@@ -16,6 +16,13 @@ import flash.net.FileReference;
 import flash.text.TextField;
 import flash.utils.ByteArray;
 import mx.utils.Base64Encoder;
+import flash.system.Security;
+import flash.system.SecurityPanel;
+import flash.filters.BitmapFilterQuality; 
+import flash.filters.GlowFilter; 
+import flash.display.Sprite; 
+
+
 
 	
 
@@ -23,43 +30,76 @@ import mx.utils.Base64Encoder;
 public class Main extends MovieClip{
 
 	private var idCamara:int= new int(0);
-	private var camara:Camera= Camera.getCamera(String(Camera.names.length-1));
+	private var camara:Camera;
 	private var vid:Video=new Video(stage.stageWidth,stage.stageHeight);
 	private var referencia:FileReference=new FileReference();
 	private var base:Base64Encoder = new Base64Encoder();
 
-	trace("Inicia Camara");
 	public function Main():void{
-		addListeners();
-		addListenersExt();
-		trace("total de camaras" + Camera.names.length);
-		ExternalInterface.call("console.log","total de camaras" + Camera.names.length);
-		ExternalInterface.call("console.log","Ancho:"+camara.width + " Altura:" + camara.height+" Fotogramas:"+camara.fps+" Ancho de Banda:"+camara.bandwidth);
 		if (Camera.names.length > 0) 
-			{ 
-				ExternalInterface.call("console.log","User has at least one camera installed."+Camera.names); 
-				vid.rotation = 0;
-				//vid.smoothing=true;
-				camara.setQuality(0,0);	
-				camara.setMode(1280,960,30)
-				vid.attachCamera(camara);	
-				//vid.attachCamera(null);
-				//vid.x=	stage.stageWidth/2-vid.width/2;
-				//vid.y=50;
-				vid.x=0;
-				vid.y=0;
-				addChildAt(vid, 0);
-
-			} 
-		else 
-			{ 
-				ExternalInterface.call("console.log","User has no cameras installed."); 
+			{
+			myTrace("Camaras detectadas:"+Camera.names);
+			initConfig();
+			addListeners();
+			addListenersExt();
+			readyCamera(SecurityPanel.PRIVACY);
+			}
+			else{
+			myTrace("Camaras no disponibles");
 			}
 	}
 
+    public function initConfig():void{
+			myTrace("Configurando Camara");
+			vid.rotation = 0;
+		    camara= Camera.getCamera(String(Camera.names.length-1));
+			myTrace("Ancho:"+camara.width + " Altura:" + camara.height+" Fotogramas:"+camara.fps+" Ancho de Banda:"+camara.bandwidth);
+			//vid.smoothing=true;
+			camara.setQuality(0,0);	
+			//camara.setMode(1280,960,30)
+			//myTrace("Ancho:"+camara.width + " Altura:" + camara.height+" Fotogramas:"+camara.fps+" Ancho de Banda:"+camara.bandwidth);
+			vid.attachCamera(camara);	
+		var glow: GlowFilter = new GlowFilter (); 
+		glow.color = 0x009922; 
+		glow.alpha = .10; 
+		glow.blurX = 25; 
+		glow.blurY = 25; 
+		glow.quality = BitmapFilterQuality.MEDIUM; 
+			//vid.attachCamera(null);
+			//vid.x=	stage.stageWidth/2-vid.width/2;
+			//vid.y=50;
+				vid.filters=[glow];
+			vid.x=0;
+			vid.y=0;
+			addChildAt(vid, 0);
+			
 
+		}
+	public function myTrace(str:String):void{
+			trace(str);
+			ExternalInterface.call("console.log",str); 		
+		}
+		
+	 public function readyCamera(nivel:String) : Boolean
+        {
+		var resp:Boolean;
+		myTrace("Total de camaras" + Camera.names.length);
+		
+               if(this.camara.muted){
+				    myTrace("Solicito Permisos");
+					Security.showSettings(nivel);
+					if(this.camara.muted){
+						readyCamera(nivel);	
+					}
+				   }
+            
+			return resp;
+			
+        }
+		
 	public function addListeners()
 	{
+		myTrace("Iniciando Listeners Botones");
 		botones.capturaImagen.addEventListener(MouseEvent.CLICK,saveImage);
 		botones.girar.addEventListener(MouseEvent.CLICK,girarCamara);
 		botones.cambiar.addEventListener(MouseEvent.CLICK,cargaCamara);
@@ -70,6 +110,7 @@ public class Main extends MovieClip{
 	
 	public function addListenersExt():void
 		{ 
+			myTrace("Iniciando Listeners Externos");
 			ExternalInterface.addCallback("_saveImageExt", saveImageExt);
 		    //ExternalInterface.addCallback("_startRecord", startRecordingExt);
 			//ExternalInterface.addCallback("_stopRecord", stopRecordingExt);
@@ -154,24 +195,19 @@ public function saveImage(event:MouseEvent):void
 	*/
 }
 
-public function saveImageExt():String
+public function saveImageExt():void
 		{
-		
+	
     var bitmapData:BitmapData=new BitmapData(vid.width, vid.height);
 	bitmapData.draw(vid);  
-	//
 	var jpgEncoder:JPGEncoder = new JPGEncoder(100);
 	var byteArray:ByteArray = jpgEncoder.encode(bitmapData);
 	//byteArray = PNGEncoder.encode(bitmapData);			
 	var strBase:String;
 	base.encodeBytes(byteArray,0,byteArray.length);
 	strBase=base.toString();
-	trace(strBase);
-			
-			
-	ExternalInterface.call("console.log", "tamaño..." + strBase.length);
-    ExternalInterface.call("receiveImage", strBase);
-	return strBase;
+	myTrace("Tamaño:"+ strBase.length);
+	ExternalInterface.call("receiveImage", strBase);
 	
 		
 		}
