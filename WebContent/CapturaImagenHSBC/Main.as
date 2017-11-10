@@ -90,7 +90,8 @@ import flash.events.ActivityEvent;
 			logsVerbose=logsVerboseX//Activa Trace de Logs
 			autophoto=autophotoX;
 			myTrace("camSelected:"+camSelected+" movCam:"+movCam+" timeCam:"+timeCam+" widthCam:"+widthCam+" heightCam"+heightCam+" fpsCam:"+fpsCam+" logsVerbose:"+logsVerbose+" autophoto:"+autophoto);
-		}
+			initConfigExt();
+			}
 		
 		private function activateHandler(event:Event):void
 		{
