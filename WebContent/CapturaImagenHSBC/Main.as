@@ -48,6 +48,7 @@ import flash.events.ActivityEvent;
 		{
 			if(Camera.names.length > 0) 
 			{
+				autoConfig();
 				ExternalInterface.call("flashReady", true);
 				initConfigExt();
 				addListeners();
@@ -57,6 +58,42 @@ import flash.events.ActivityEvent;
 			else{
 				myTrace("Camaras no conectadas");
 				ExternalInterface.call("receiveMessage", "Camaras no conectadas");
+			}
+		}
+		public function autoConfig():void{
+			var keyStr:String;
+			var valueStr:String;
+			var paramObj:Object = LoaderInfo(this.root.loaderInfo).parameters;   //set the paramObj variable to the parameters property of the LoaderInfo object
+			for (keyStr in paramObj) 
+			{
+				valueStr = String(paramObj[keyStr]);
+				
+				if(keyStr=="camSelected"){
+					camSelected=int(valueStr);
+				};//Camara default
+				if(keyStr=="movCam"){
+					movCam=int(valueStr);
+				};//Camara default
+				//Cantidad de movimiento considerada como activo
+				if(keyStr=="timeCam"){
+					timeCam=int(valueStr);
+				};//tiempo en el que se deve detectar el movimiento captado
+				if(keyStr=="widthCam"){
+					widthCam=int(valueStr);
+				};//ancho de lacamara
+				if(keyStr=="heightCam"){
+					heightCam=int(valueStr);
+				};//alto de la camara
+				if(keyStr=="fpsCam"){
+					fpsCam=int(valueStr);
+				};//velocidad de la camara
+				if(keyStr=="logsVerbose"){
+					logsVerbose=int(valueStr);
+				};
+				if(keyStr=="autophoto"){
+					autophoto=int(valueStr);
+				};
+				myTrace("\t" + keyStr + ":\t" + valueStr + "\n");  
 			}
 		}
 
