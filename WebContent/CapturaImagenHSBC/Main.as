@@ -4,7 +4,7 @@ import flash.display.MovieClip;
 import com.adobe.images.JPGEncoder;
 import com.adobe.images.PNGEncoder;
 import flash.display.Stage; 
-flash.display.Sprite;;
+import flash.display.Sprite;
 import flash.display.StageAlign; 
 import flash.display.StageScaleMode; 
 import flash.display.StageDisplayState;
