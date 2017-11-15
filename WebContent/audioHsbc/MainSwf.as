@@ -1,6 +1,6 @@
 ﻿package 
 {
-	import flash.display.Sprite;
+	import flash.display.*;
 	import flash.utils.Timer;
 	import flash.utils.getTimer
 	import flash.display.MovieClip;
@@ -53,12 +53,41 @@
 		public function MainSwf():void
 		{  
 			recBar.status.text = "Iniciando Microfono..";
+			autoConfig();
 			addListenersPrin();
 			addListeners();
 			addListenersExt();
 			recBar.status.text = "Listo";
 			addChild(recBar);
 			isReadyExt();
+		}
+		
+		public function autoConfig():void{
+	
+			var keyStr:String;
+			var valueStr:String;
+			var paramObj:Object = LoaderInfo(this.root.loaderInfo).parameters;   //set the paramObj variable to the parameters property of the LoaderInfo object
+			for (keyStr in paramObj) 
+			{
+				valueStr = String(paramObj[keyStr]);
+				
+				if(keyStr=="xvol"){
+					xvol=int(valueStr);
+				};//Volumen de reproduccion de audio
+				if(keyStr=="xgain"){
+					xgain=int(valueStr);
+				};//Ganancia del microfono 50 default 100 amplificado
+				if(keyStr=="xrate"){
+					xrate=int(valueStr);
+				};//Calidad de grabacion
+				if(keyStr=="xnoise"){
+					xnoise=int(valueStr);
+				};//Reduccion de ruido
+				if(keyStr=="xLogVerbose"){
+					xLogVerbose=int(valueStr);
+				};//Activar logs
+				myTrace("\t" + keyStr + ":\t" + valueStr + "\n");  
+			}
 		}
 
 		/***Inicializa los eventos de los 
