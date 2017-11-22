@@ -167,8 +167,7 @@ import flash.events.ActivityEvent;
 		   var cameraP:Camera= Camera.getCamera() ;
 		   do{
 			   var strCam:String=Camera.getCamera(String(cont-1)).name;
-				myTrace("Camara"+cont+":"+strCam+"-"+(camSelected==myInt));
-			   if(strCam=="Cámara FaceTime HD (integrada)" && camSelected==myInt){
+			   if(strCam==cameraMain && camSelected==myInt){
 				   myTrace("Camara encontrada");
 				   cameraP=Camera.getCamera(String(String(cont-1)));
 				   }
