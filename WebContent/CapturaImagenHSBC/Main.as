@@ -35,7 +35,7 @@ import flash.events.ActivityEvent;
 		private var referencia:FileReference=new FileReference();
 		private var base:Base64Encoder = new Base64Encoder();
 		private var camaraActiva:Boolean=false;
-		private var camSelected:uint=0;//Camara default
+		private var camSelected:uint=-1;//Camara default
 		private var cameraMain:String="";//Camara default
 		private var movCam:uint=50;//Cantidad de movimiento considerada como activo
 		private var timeCam:uint=3000;//tiempo en el que se deve detectar el movimiento captado
@@ -166,7 +166,7 @@ import flash.events.ActivityEvent;
 		   do{
 			   var strCam:String=Camera.getCamera(String(cont-1)).name;
 				myTrace("Camara"+cont+":"+strCam);
-			   if(strCam==cameraMain && camSelected==0){
+			   if(strCam==cameraMain && camSelected==-1){
 				   myTrace("Camara encontrada");
 				   cameraP=Camera.getCamera(String(String(cont-1)));
 				   }
