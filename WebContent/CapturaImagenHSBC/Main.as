@@ -36,6 +36,7 @@ import flash.events.ActivityEvent;
 		private var base:Base64Encoder = new Base64Encoder();
 		private var camaraActiva:Boolean=false;
 		private var camSelected:uint=0;//Camara default
+		private var cameraMain:String="";//Camara default
 		private var movCam:uint=50;//Cantidad de movimiento considerada como activo
 		private var timeCam:uint=3000;//tiempo en el que se deve detectar el movimiento captado
 		private var widthCam:int=1280;//ancho de lacamara
@@ -48,7 +49,7 @@ import flash.events.ActivityEvent;
 		{
 			if(Camera.names.length > 0) 
 			{
-				autoConfig();
+				//autoConfig();
 				ExternalInterface.call("flashReady", true);
 				initConfigExt();
 				addListeners();
@@ -68,8 +69,8 @@ import flash.events.ActivityEvent;
 			{
 				valueStr = String(paramObj[keyStr]);
 				
-				if(keyStr=="camSelected"){
-					camSelected=int(valueStr);
+				if(keyStr=="cameraMain"){
+					cameraMain=valueStr;
 				};//Camara default
 				if(keyStr=="movCam"){
 					movCam=int(valueStr);
@@ -116,9 +117,9 @@ import flash.events.ActivityEvent;
 			ExternalInterface.addCallback("_changeCam", changeCamExt);
 		}
 
-		public function setConfigs(camSelectedX:uint,movCamX:uint,timeCamX:uint,widthCamX:uint,heightCamX:uint,fpsCamX:uint,logsVerboseX:uint,autophotoX:uint)
+		public function setConfigs(cameraMainX:String,movCamX:uint,timeCamX:uint,widthCamX:uint,heightCamX:uint,fpsCamX:uint,logsVerboseX:uint,autophotoX:uint)
 		{
-			camSelected=camSelectedX;//Camara default
+			cameraMain=cameraMainX;//Camara default
 			movCam=movCamX;//Cantidad de movimiento considerada como activo
 			timeCam=timeCamX;//tiempo en el que se deve detectar el movimiento captado
 			widthCam=widthCamX;//ancho de lacamara
@@ -159,19 +160,35 @@ import flash.events.ActivityEvent;
 	}
 		
 		
+	   public function browseCamera():Camera{
+		   var cont:int=1;
+		   var cameraP:Camera= Camera.getCamera() ;
+		   do{
+			   var strCam:String=Camera.getCamera(String(cont-1)).name;
+				myTrace("Camara"+cont+":"+strCam);
+			   if(strCam==cameraMain){
+				   myTrace("Camara encontrada");
+				   cameraP=Camera.getCamera(String(String(cont-1)));
+				   }
+			   cont++;
+			 }while(cont<=Camera.names.length);
+			   
+			return(cameraP);
+
+		   }
 		
 		/***Inicializo la camra***/
 		public function initConfigExt():void
 		{
 			myTrace("Cofiguro Video");
 			vid= new Video(widthCam,heightCam);
-		    camara = Camera.getCamera( String(camSelected) );			
+		    camara = browseCamera();
 			camara.setMode(widthCam,heightCam,fpsCam);
 			camara.setMotionLevel(movCam, timeCam);
 			if(autophoto==1)
             camara.addEventListener(ActivityEvent.ACTIVITY, activityHandlerCam);
 			camaraActiva=true;
-			myTrace("Camara:"+ camara.name+"  heightCam:"+heightCam+"  widthCam:"+widthCam+"  Activa:"+camaraActiva+"  AnchoCam:"+camara.width + "  AlturaCam:" + camara.height+"  Fotogramas:"+camara.fps+"  Ancho de Banda:"+camara.bandwidth);
+			myTrace("CamaraConfigurada:"+ camara.name+"  heightCam:"+heightCam+"  widthCam:"+widthCam+"  Activa:"+camaraActiva+"  AnchoCam:"+camara.width + "  AlturaCam:" + camara.height+"  Fotogramas:"+camara.fps+"  Ancho de Banda:"+camara.bandwidth);
 			vid.attachCamera(null);	
 			vid.attachCamera(camara);	
 			resize();
