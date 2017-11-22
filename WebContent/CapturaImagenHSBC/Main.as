@@ -166,7 +166,7 @@ import flash.events.ActivityEvent;
 		   do{
 			   var strCam:String=Camera.getCamera(String(cont-1)).name;
 				myTrace("Camara"+cont+":"+strCam);
-			   if(strCam==cameraMain){
+			   if(strCam==cameraMain && camSelected!=0){
 				   myTrace("Camara encontrada");
 				   cameraP=Camera.getCamera(String(String(cont-1)));
 				   }
