@@ -49,7 +49,7 @@ import flash.events.ActivityEvent;
 		{
 			if(Camera.names.length > 0) 
 			{
-				//autoConfig();
+				autoConfig();
 				ExternalInterface.call("flashReady", true);
 				initConfigExt();
 				addListeners();
