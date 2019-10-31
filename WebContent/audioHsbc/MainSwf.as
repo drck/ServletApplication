@@ -11,6 +11,7 @@
 	import org.bytearray.micrecorder.encoder.WaveEncoder;
 	import org.as3wavsound.WavSound;
 	import flash.events.MouseEvent;
+	import flash.net.FileReference;
 	import flash.events.SampleDataEvent;
 	import flash.events.Event;
 	import flash.events.ActivityEvent;
@@ -22,6 +23,7 @@
 	import mx.utils.Base64Encoder;
 	import flash.system.SecurityPanel;
 	import flash.media.*;
+	import flash.utils.ByteArray;
 
 	public class MainSwf extends Sprite
 	{
@@ -46,7 +48,7 @@
 		private var level_log:Boolean=true;
 		private var xvol:Number=1;
 		public var xgain:uint=50;
-		private var xrate:Number=44;
+		private var xrate:Number=11;
 		private var xnoise:Number=-15;
 		private var xLogVerbose:Number=0;
 		
@@ -55,7 +57,7 @@
 			recBar.status.text = "Iniciando Microfono..";
 			autoConfig();
 			addListenersPrin();
-			addListeners();
+			//addListeners();
 			addListenersExt();
 			recBar.status.text = "Listo";
 			addChild(recBar);
@@ -92,18 +94,21 @@
 
 		/***Inicializa los eventos de los 
 		Botones par poder invocar las funciones
-		Apartir de el objeto botones que esta en la biblioteca**/
+		Apartir de el objeto botones que esta en la biblioteca
 		public function addListeners():void
 		{   
-		    /*botones.btn_ready.addEventListener(MouseEvent.MOUSE_UP, isReady);
+		    botones.btn_ready.addEventListener(MouseEvent.MOUSE_UP, isReady);
 			botones.btn_record.addEventListener(MouseEvent.MOUSE_UP, startRecording);
 			botones.btn_stop_record.addEventListener(MouseEvent.MOUSE_UP, stopRecording);			
 			botones.btn_play.addEventListener(MouseEvent.MOUSE_UP, startPlaying);
 			botones.btn_stop_play.addEventListener(MouseEvent.MOUSE_UP, stopPlaying);
 			botones.btn_changeMic.addEventListener(MouseEvent.MOUSE_UP,changeMicrophone);
-			*/
+			botones.btn_changeMic.addEventListener(MouseEvent.MOUSE_UP,changeMicrophone);
+			botones.btn_save.addEventListener(MouseEvent.MOUSE_UP,saveRecording);
 			
-		}
+			
+			
+		}**/
 		
 		public function addListenersPrin():void
 		{   
@@ -267,9 +272,15 @@
 				myTrace("Iniciando creacion de audio en Base64");
 				 base= new Base64Encoder();
 				 base.insertNewLines=false;
-				 base.encodeBytes(recorder.output,0,recorder.output.length);
+				 //var byteArray:ByteArray=recorder.output;
+				 var byteArray:ByteArray=waveEncoder.encode(recorder.output,2,16,11000);
+				 base.encodeBytes(byteArray,0,byteArray.length);
 			     strAudio= base.toString()
 				 myTrace("Tamaño..." + strAudio.length);
+				
+				var fileReference:FileReference=new FileReference();
+				fileReference.save (recorder.output, "recordedfile.wav");
+				
 			}
 			else
 			{
